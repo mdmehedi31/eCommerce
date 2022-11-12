@@ -20,7 +20,7 @@ public class AppInitializer implements WebApplicationInitializer {
         servletContext.addListener(new ContextLoaderListener(rootConfig));
 
 
-        //servelt Config
+        //servlet Config
         AnnotationConfigWebApplicationContext servletConfig= new AnnotationConfigWebApplicationContext();
         servletConfig.register(ServletConfig.class);
 
