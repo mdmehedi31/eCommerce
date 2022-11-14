@@ -31,8 +31,10 @@
             <td>${counter.count}</td>
             <td>${category.categoryName}</td>
             <td>${category.categoryDesc}</td>
-            <td><a href="<c:url value="/editCategory/${category.categoryId}"/>" class="btn btn-success"> EDIT</a></td>
-            <td><a href="<c:url value="/deleteCategory/${category.categoryId}"/>" class="btn btn-danger">DELETE</a></td>
+            <td>
+                <a href="<c:url value="/editCategory/${category.categoryId}"/>" class="btn btn-success"> EDIT</a>
+                <a href="<c:url value="/deleteCategory/${category.categoryId}"/>" class="btn btn-danger">DELETE</a>
+            </td>
         </tr>
     </c:forEach>
         </tbody>

@@ -2,10 +2,7 @@ package com.ecommerce.entity;
 
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Data
@@ -15,6 +12,7 @@ public class Supplier implements Serializable {
 
     @Id
     @Column(name = "sup_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int supplierId;
 
     @Column(name = "sup_name")

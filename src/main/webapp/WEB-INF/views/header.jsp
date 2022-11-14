@@ -29,10 +29,13 @@
           <a class="nav-link" href="contactus">CONTACT US</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="aboutus">ABOUT US</a>
+          <a class="nav-link" href="supplier">Supplier</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="category">Manage Category</a>
+          <a class="nav-link" href="showSupplier">Show Supplier</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="category">Category</a>
         </li>
 
         <li class="nav-item">

@@ -9,7 +9,7 @@ import java.io.Serializable;
 @Data
 @Entity
 @Table(name = "tbproduct")
-public class Product implements Serializable {
+public class  Product implements Serializable {
 
     @Id
     @Column(name = "pro_id",nullable = false)

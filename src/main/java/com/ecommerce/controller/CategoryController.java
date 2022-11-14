@@ -18,7 +18,7 @@ public class CategoryController {
     private CategoryDao categoryDao;
 
     @GetMapping("/category")
-    public String Category(Model m){
+    public String category(Model m){
         m.addAttribute("categoryDto", new CategoryDto());
        return "category";
     }
@@ -83,9 +83,9 @@ public class CategoryController {
         Category category=categoryDao.getCategory(categoryId);
         categoryDao.deleteCategory(category);
 
-         List<Category> categories= categoryDao.listCategory();
-         m.addAttribute("categories",categories);
-         return "showCategory";
+         /*List<Category> categories= categoryDao.listCategory();
+         m.addAttribute("categories",categories);*/
+         return "redirect:/showCategory";
      }
 
 }
