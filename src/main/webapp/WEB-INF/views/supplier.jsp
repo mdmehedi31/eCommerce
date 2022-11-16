@@ -26,7 +26,7 @@
 
   <tr>
     <td align="center">Supplier Address</td>
-    <td><form:input  type="text" cssclass="form-control" id="categoryDes" placeholder="Address"  path="supplierAddress"></form:input></td>
+    <td><form:textarea  type="text" cssclass="form-control" id="categoryDes" placeholder="Address"  path="supplierAddress"></form:textarea></td>
   </tr>
 
   <tr>

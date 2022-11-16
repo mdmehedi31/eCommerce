@@ -5,11 +5,12 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 @Entity
 @Table(name = "tbproduct")
-public class  Product implements Serializable {
+public class    Product implements Serializable {
 
     @Id
     @Column(name = "pro_id",nullable = false)
@@ -22,15 +23,22 @@ public class  Product implements Serializable {
     @Column(name = "pro_desc")
     private String productDesc;
 
-    @Column(name = "pro_price")
-    private int productPrice;
+    @Column(name = "price")
+    private Long productPrice;
 
     @Column(name = "stock")
     private int stock;
 
-    @Column(name = "cat_id")
-    private int categoryId;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id",referencedColumnName = "cat_id")
+    private Category category;
 
     @Column(name = "sup_id")
     private int supplierId;
+
+    @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true)
+    @JoinTable(name = "product_attachment",
+                joinColumns = {@JoinColumn(name = "product_id", referencedColumnName = "pro_id")},
+                inverseJoinColumns = {@JoinColumn(name ="attachment_id", referencedColumnName = "id")})
+    private List<Attachment> productAttachmentList;
 }

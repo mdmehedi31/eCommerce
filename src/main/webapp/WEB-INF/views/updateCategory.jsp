@@ -1,4 +1,4 @@
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+ <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="/WEB-INF/views/header.jsp"  %>
 <html>
@@ -14,7 +14,7 @@
     <table>
     <tr>
         <td colspan="2">
-            <center><h3>Add Category</h3></center>
+            <center><h3>Update Category</h3></center>
         </td>
     </tr>
 

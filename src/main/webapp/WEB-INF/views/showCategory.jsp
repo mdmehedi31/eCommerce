@@ -3,7 +3,7 @@
 <%@ include file="/WEB-INF/views/header.jsp"  %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Show Category</title>
 
     <style>
         table, th, td{

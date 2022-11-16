@@ -82,4 +82,24 @@ public class CategoryDaoImpl implements CategoryDao {
         Category category= session.get(Category.class, categoryId);
         return category;
     }
+
+    @Override
+    public Category getByName(String name) {
+
+        Category category=null;
+
+        Session session= sessionFactory.getCurrentSession();
+
+        try{
+            Query query= session.createQuery("FROM Category WHERE categoryName =:name").
+                    setParameter("name", name);
+            category=(Category) query.uniqueResult();
+        }catch (Exception e){
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        }
+        session.flush();
+
+        return category;
+    }
 }

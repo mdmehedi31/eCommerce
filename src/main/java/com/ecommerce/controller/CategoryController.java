@@ -17,7 +17,7 @@ public class CategoryController {
     @Autowired
     private CategoryDao categoryDao;
 
-    @GetMapping("/category")
+    @RequestMapping("/category")
     public String category(Model m){
         m.addAttribute("categoryDto", new CategoryDto());
        return "category";
@@ -50,8 +50,10 @@ public class CategoryController {
      }
 
      @RequestMapping(value = "/updateCategory", method = RequestMethod.POST)
-     public String updateCategory(Model model,  @RequestParam("categoryId") int categoryId,
-                                  @ModelAttribute("categoryDto") CategoryDto categoryDto){
+     public String updateCategory(Model model,  @RequestParam("categoryId")
+                                    int categoryId,
+                                  @ModelAttribute("categoryDto") CategoryDto
+                                          categoryDto){
 
 
             Category category= categoryDao.getCategory(categoryId);

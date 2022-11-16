@@ -26,7 +26,7 @@
 
      <tr>
        <td align="center">Category Desc</td>
-         <td><form:input  type="text" cssclass="form-control" id="categoryDes" placeholder="CategoryDes"  path="categoryDesc"></form:input></td>
+         <td><form:textarea  type="text" cssclass="form-control" id="categoryDes" placeholder="CategoryDes"  path="categoryDesc"></form:textarea></td>
      </tr>
 
      <tr>
