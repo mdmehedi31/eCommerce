@@ -11,18 +11,30 @@
 
       <c:forEach items="${productList}" var="product">
 
-        <div>
+        <div class="col-sm-4 col-md-3">
           <a href="<c:url value="/totalProductDisplay/${product.productId}" />" class="thumbnail">
-           <c:forEach var="image" items="${product.getProductAttachmentList()}">
-             <img src="/images/${image.getAttchmentPath()}" alt="Generic placeholder thumbnail" height="100px" width="100px" style="object-fit: cover" />
-           </c:forEach>
+              <img src="/image/${product.getAttachment().getAttachmentPath()}" alt="${product.getAttachment().getAttachmentPath()}" />
           </a>
-          <p align="center">${product.productName}</p>
-          <p align="center">${product.productPrice}</p>
-          <p align="center">${product.stock}</p>
+            <tr>
+                <td>
+                    <label>Name: </label>
+                    <p align="center">${product.productName}</p>
+                </td>
+                <td>
+                    <label>Price: </label>
+                    <p align="center">${product.productPrice}</p>
+                </td>
+                <td>
+                    <label>Stock</label>
+                    <p align="center">${product.stock}</p>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button  class="btn btn-success">BUY</button>
+                </td>
+            </tr>
         </div>
-
-
       </c:forEach>
 
     </div>

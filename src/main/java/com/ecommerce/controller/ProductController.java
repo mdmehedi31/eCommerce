@@ -10,6 +10,7 @@ import com.ecommerce.entity.Attachment;
 import com.ecommerce.entity.Category;
 import com.ecommerce.entity.Product;
 import com.ecommerce.utils.Utils;
+import org.hibernate.type.StringNVarcharType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -43,7 +44,7 @@ public class ProductController {
             categoryList.add(category.getCategoryName());
         }
         model.addAttribute("categoryList",categoryList);
-        model.addAttribute("productDto", new ProductDto());
+        model.addAttribute("product", new Product());
 
         return new ModelAndView("createProduct","model", model);
     }
@@ -51,19 +52,12 @@ public class ProductController {
 
     @PostMapping("views/createProduct")
     public String store(Model model, @ModelAttribute("product") ProductDto productDto,
-                        @RequestParam("images")MultipartFile[] files) throws IOException {
+                        @RequestParam("image") MultipartFile file) throws IOException {
 
         Category category=categoryDao.getByName(productDto.getCategory());
-        List<Attachment> attachmentList = new ArrayList<>();
 
-        for (MultipartFile file : files){
+        Attachment attachment=Utils.saveFile(file,Properties.USER_FOLDER);
 
-            Attachment attachment= Utils.saveFile(file, Properties.PRODUCT_FOLDER);
-            if (attachment!=null){
-                attachmentList.add(attachment);
-            }
-        }
-        attachmentDao.insertBulkAttachment(attachmentList);
 
         Product product= new Product();
         product.setProductName(productDto.getProductName());
@@ -72,7 +66,7 @@ public class ProductController {
         product.setCategory(category);
         product.setSupplierId(productDto.getSupplierId());
         product.setProductDesc(productDto.getProductDesc());
-        product.setProductAttachmentList(attachmentList);
+        product.setAttachment(attachment);
         productDao.addProduct(product);
 
       //  model.addAttribute("products", product);
@@ -120,4 +114,21 @@ public class ProductController {
 
         return "redirect:/showProduct";
     }
+
+    @RequestMapping(value = "/productDisplay")
+    public String displayAllProduct(Model model){
+        List<Product> productList= productDao.listProduct();
+        model.addAttribute("productList", productList);
+        return "productDisplay";
+    }
+
+    @RequestMapping(value = "/totalProductDisplay/{productId}")
+    public String totalProductDisplay(Model model, @PathVariable("productId") int productId){
+
+        Product product= productDao.getProduct(productId);
+        model.addAttribute("product",product);
+        return "totalProductDisplay";
+
+    }
+
 }

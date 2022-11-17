@@ -36,9 +36,7 @@ public class    Product implements Serializable {
     @Column(name = "sup_id")
     private int supplierId;
 
-    @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true)
-    @JoinTable(name = "product_attachment",
-                joinColumns = {@JoinColumn(name = "product_id", referencedColumnName = "pro_id")},
-                inverseJoinColumns = {@JoinColumn(name ="attachment_id", referencedColumnName = "id")})
-    private List<Attachment> productAttachmentList;
+   @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+   @JoinColumn(name = "attachment_id", referencedColumnName = "id")
+    private Attachment Attachment;
 }

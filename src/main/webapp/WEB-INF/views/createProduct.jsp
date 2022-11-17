@@ -9,9 +9,10 @@
 
 
 
-<%--@elvariable id="productDto" type="com.ecommerce.dto.ProductDto"--%>
+
+<%--@elvariable id="product" type="com.ecommerce.entity.Product"--%>
 <form:form action="${pageContext.request.contextPath}views/createProduct" method="post"
-           modelAttribute="productDto" enctype="multipart/form-data">
+           modelAttribute="product" enctype="multipart/form-data">
     <table class="table">
 
         <tr>
@@ -53,7 +54,7 @@
         <tr>
             <td align="left">Product Picture</td>
             <td>
-                <input type="file"  name="images" multiple="multiple" accept="image/*"/>
+                <input type="file"  name="image"  accept="image/*"/>
             </td>
         </tr>
 

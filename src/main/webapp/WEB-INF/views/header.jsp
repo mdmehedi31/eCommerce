@@ -20,7 +20,7 @@
           <a class="nav-link active" aria-current="page" href="#">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="register">REGISTER</a>
+          <a class="nav-link" href="Login">LOGIN</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="createProduct">Product</a>
@@ -28,6 +28,9 @@
        <li  class="nav-item">
         <a class="nav-link" href="showProduct">Show Product</a>
         </li>
+          <li  class="nav-item">
+          <a class="nav-link" href=productDisplay> Product Catalog</a>
+      </li>
         <li class="nav-item">
           <a class="nav-link" href="supplier">Supplier</a>
         </li>
