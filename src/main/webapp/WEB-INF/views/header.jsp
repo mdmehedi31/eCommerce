@@ -23,6 +23,9 @@
           <a class="nav-link" href="Login">LOGIN</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="signup">Sign Up</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="createProduct">Product</a>
         </li>
        <li  class="nav-item">
@@ -43,6 +46,14 @@
 
         <li class="nav-item">
           <a class="nav-link" href="showCategory">Show Category</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="Cart">Cart</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="payment">Payment</a>
         </li>
       </ul>
       <form class="d-flex">

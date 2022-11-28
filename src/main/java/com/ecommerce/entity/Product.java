@@ -24,7 +24,7 @@ public class    Product implements Serializable {
     private String productDesc;
 
     @Column(name = "price")
-    private Long productPrice;
+    private int productPrice;
 
     @Column(name = "stock")
     private int stock;
@@ -39,4 +39,6 @@ public class    Product implements Serializable {
    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
    @JoinColumn(name = "attachment_id", referencedColumnName = "id")
     private Attachment Attachment;
+
+
 }

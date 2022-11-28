@@ -1,9 +1,13 @@
 package com.ecommerce.entity;
 
+import com.ecommerce.enums.Role;
 import lombok.Data;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Collection;
 
 @Data
 @Entity
@@ -21,16 +25,21 @@ public class User implements Serializable {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "email")
+    private String email;
+
+    @Enumerated(EnumType.STRING)
     @Column(name = "role")
-    private String role;
+    private Role role;
 
-    @Column(name = "enabled")
-    private boolean enabled;
+//    @Column(name = "enabled")
+//    private boolean enabled;
 
-    @Column(name = "customer_name")
+  /*  @Column(name = "customer_name")
     private String customerName;
-
+*/
     @Column(name = "customer_address")
     private String customerAddress;
+
 
 }

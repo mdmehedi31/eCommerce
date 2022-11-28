@@ -22,7 +22,7 @@ public class SupplierController {
     public String supplier(Model m){
 
         m.addAttribute("supplierDto", new SupplierDto());
-        return "supplier";
+        return "/admin/supplier";
     }
 
 
@@ -43,12 +43,12 @@ public class SupplierController {
         return "redirect:/showSupplier";
     }
 
-    @GetMapping("showSupplier")
+    @GetMapping("/showSupplier")
     public String getSupplier(Model model){
 
         List<Supplier> suppliers= supplierDao.listSuppliers();
         model.addAttribute("suppliers",suppliers);
-        return "showSupplier";
+        return "admin/showSupplier";
     }
 
     @RequestMapping(value = "/updateSupplier", method = RequestMethod.POST)
@@ -59,7 +59,7 @@ public class SupplierController {
         supplier.setSupplierName(supplierDto.getSupplierName());
         supplier.setSupplierAddress(supplierDto.getSupplierAddress());
         supplierDao.updateSupplier(supplier);
-        return "redirect:/showSupplier";
+        return "redirect:/admin/showSupplier";
     }
 
     @RequestMapping(value = "/editSupplier/{supplierId}")
@@ -67,7 +67,7 @@ public class SupplierController {
                                @PathVariable("supplierId") int supplierId){
         Supplier supplier=supplierDao.getSupplier(supplierId);
         model.addAttribute("supplier", supplier);
-        return "updateSupplier";
+        return "admin/updateSupplier";
     }
 
     @RequestMapping(value = "/deleteSupplier/{supplierId}")
@@ -77,6 +77,6 @@ public class SupplierController {
         Supplier supplier=supplierDao.getSupplier(supplierId);
         supplierDao.deleteSupplier(supplier);
 
-        return "redirect:/showSupplier";
+        return "redirect:/admin/showSupplier";
     }
 }

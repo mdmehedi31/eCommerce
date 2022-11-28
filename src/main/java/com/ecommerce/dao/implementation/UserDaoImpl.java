@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 
 @Transactional
 @Component
@@ -52,5 +54,22 @@ public class UserDaoImpl implements UserDao {
         User userDetails =session.get(User.class, userName);
         session.close();
         return userDetails;
+    }
+
+    @Override
+    public User findByEmail(String email) {
+        List<User> users = sessionFactory.getCurrentSession()
+                .createQuery("FROM User WHERE email = :email", User.class)
+                .setParameter("email", email)
+                .getResultList();
+        return users.size() > 0 ? users.get(0) : null;
+    }
+
+    public User findByUsername(String username) {
+        List<User> users = sessionFactory.getCurrentSession()
+                .createQuery("FROM User WHERE userName= :username", User.class)
+                .setParameter("username", username.toLowerCase())
+                .getResultList();
+        return users.size() > 0 ? users.get(0) : null;
     }
 }

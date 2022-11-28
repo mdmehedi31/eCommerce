@@ -1,5 +1,7 @@
 package com.ecommerce.config;
 
+
+import com.ecommerce.config.Security.SecurityConfig;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
@@ -11,11 +13,11 @@ import javax.servlet.*;
 public class AppInitializer implements WebApplicationInitializer {
 
     @Override
-    public void onStartup(ServletContext servletContext) throws ServletException {
+    public void onStartup(ServletContext servletContext) {
 
         //root config
         AnnotationConfigWebApplicationContext rootConfig= new AnnotationConfigWebApplicationContext();
-        rootConfig.register(DBConfig.class);
+        rootConfig.register(RootConfig.class, DBConfig.class, SecurityConfig.class);
         rootConfig.refresh();
         servletContext.addListener(new ContextLoaderListener(rootConfig));
 
@@ -23,10 +25,13 @@ public class AppInitializer implements WebApplicationInitializer {
         //servlet Config
         AnnotationConfigWebApplicationContext servletConfig= new AnnotationConfigWebApplicationContext();
         servletConfig.register(ServletConfig.class);
+        ServletRegistration.Dynamic servletRegistration= servletContext.addServlet("servlet",
+                new DispatcherServlet(servletConfig));
 
         // Multipart Config
-        ServletRegistration.Dynamic servletRegistration= servletContext.addServlet("servlet", new DispatcherServlet(servletConfig));
-        servletRegistration.setMultipartConfig(new MultipartConfigElement("/",2097152,41943054,50));
+        MultipartConfigElement multipartConfig= new MultipartConfigElement(Properties.TEMP_LOCATION, Properties.MAX_FILE_SIZE,
+                Properties.MAX_REQUEST_SIZE,Properties.FILE_THRESHOLD_SIZE);
+        servletRegistration.setMultipartConfig(multipartConfig);
 
 
         //Multipart Filter Config

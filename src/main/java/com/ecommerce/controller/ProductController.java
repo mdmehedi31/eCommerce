@@ -10,7 +10,6 @@ import com.ecommerce.entity.Attachment;
 import com.ecommerce.entity.Category;
 import com.ecommerce.entity.Product;
 import com.ecommerce.utils.Utils;
-import org.hibernate.type.StringNVarcharType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -46,7 +45,7 @@ public class ProductController {
         model.addAttribute("categoryList",categoryList);
         model.addAttribute("product", new Product());
 
-        return new ModelAndView("createProduct","model", model);
+        return new ModelAndView("/admin/createProduct","model", model);
     }
 
 
@@ -55,9 +54,9 @@ public class ProductController {
                         @RequestParam("image") MultipartFile file) throws IOException {
 
         Category category=categoryDao.getByName(productDto.getCategory());
-
         Attachment attachment=Utils.saveFile(file,Properties.USER_FOLDER);
 
+       /* String name=category.getCategoryName();*/
 
         Product product= new Product();
         product.setProductName(productDto.getProductName());
@@ -69,6 +68,7 @@ public class ProductController {
         product.setAttachment(attachment);
         productDao.addProduct(product);
 
+/*        model.addAttribute("name", name);*/
       //  model.addAttribute("products", product);
         return "redirect:/showProduct";
     }
@@ -78,7 +78,7 @@ public class ProductController {
 
         List<Product> products= productDao.listProduct();
         model.addAttribute("products",products);
-        return "showProduct";
+        return "/user/showProduct";
     }
 
     @RequestMapping(value = "/updateProduct", method = RequestMethod.POST)
@@ -93,7 +93,7 @@ public class ProductController {
 
         productDao.updateProduct(product);
 
-        return "redirect:/showProduct";
+        return "redirect:/user/showProduct";
     }
 
     @RequestMapping(value = "/editProduct/{productId}")
@@ -103,7 +103,7 @@ public class ProductController {
         Product product = productDao.getProduct(productId);
         model.addAttribute("product", product);
 
-        return "updateProduct";
+        return "/updateProduct/updateProduct";
     }
 
     @RequestMapping(value = "/deleteProduct/{productId}")
@@ -112,22 +112,24 @@ public class ProductController {
         Product product=productDao.getProduct(productId);
         productDao.deleteProduct(product);
 
-        return "redirect:/showProduct";
+        return "redirect:/showProduct/showProduct";
     }
 
     @RequestMapping(value = "/productDisplay")
     public String displayAllProduct(Model model){
         List<Product> productList= productDao.listProduct();
         model.addAttribute("productList", productList);
-        return "productDisplay";
+        return "/user/productDisplay";
     }
 
     @RequestMapping(value = "/totalProductDisplay/{productId}")
-    public String totalProductDisplay(Model model, @PathVariable("productId") int productId){
+    public String totalProductDisplay(Model model,
+                                      @PathVariable("productId")
+    int productId){
 
         Product product= productDao.getProduct(productId);
         model.addAttribute("product",product);
-        return "totalProductDisplay";
+        return "user/totalProductDisplay";
 
     }
 

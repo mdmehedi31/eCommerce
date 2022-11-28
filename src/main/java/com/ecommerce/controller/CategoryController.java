@@ -17,10 +17,10 @@ public class CategoryController {
     @Autowired
     private CategoryDao categoryDao;
 
-    @RequestMapping("/category")
+    @RequestMapping("category")
     public String category(Model m){
         m.addAttribute("categoryDto", new CategoryDto());
-       return "category";
+       return "admin/category";
     }
 
 
@@ -46,7 +46,7 @@ public class CategoryController {
 
         List<Category> categories= categoryDao.listCategory();
         model.addAttribute("categories",categories);
-        return "showCategory";
+        return "admin/showCategory";
      }
 
      @RequestMapping(value = "/updateCategory", method = RequestMethod.POST)
@@ -75,7 +75,7 @@ public class CategoryController {
                                   int categoryId){
         Category category= categoryDao.getCategory(categoryId);
         model.addAttribute("category",category);
-         return "updateCategory";
+         return "admin/updateCategory";
      }
 
      @RequestMapping(value = "/deleteCategory/{catId}")

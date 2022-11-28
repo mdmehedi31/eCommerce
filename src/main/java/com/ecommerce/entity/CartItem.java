@@ -19,10 +19,10 @@ public class CartItem  implements Serializable {
     private int productId;
 
     @Column(name = "quantity")
-    private int quantity;
+    private Long quantity;
 
     @Column(name = "price")
-    private Long price;
+    private int price;
 
     @Column(name = "productName")
     private String productName;

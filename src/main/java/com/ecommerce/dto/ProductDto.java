@@ -7,12 +7,13 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
+
 @Data
 public class ProductDto {
 
     private String productName;
     private String productDesc;
-    private Long productPrice;
+    private int productPrice;
     private int stock;
     private String category;
     private int supplierId;

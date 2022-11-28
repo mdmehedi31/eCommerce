@@ -7,7 +7,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -84,4 +83,13 @@ public class ProductDaoImpl implements ProductDao {
         return product;
 
     }
+
+    /*@Override
+    public String getCategoryByProductId(int productId) {
+
+        Session session= sessionFactory.openSession();
+        Query name=session.createQuery(" select  from tbproduct where productId=:productId");
+    }
+*/
+
 }
