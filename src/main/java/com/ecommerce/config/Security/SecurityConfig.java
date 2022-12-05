@@ -5,14 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 @EnableWebSecurity
@@ -25,57 +23,63 @@ public class SecurityConfig {
     @Autowired
     private UserService userService;
 
-
+    @Autowired
+    private AuthSuccessHandler authSuccessHandler;
 
     @Autowired
     public void configure(AuthenticationManagerBuilder aut) throws Exception{
 
-        aut.userDetailsService(userService).passwordEncoder(passwordEncoder);
+       aut.userDetailsService(userService).passwordEncoder(passwordEncoder);
 
 
- /* aut.inMemoryAuthentication().
+  /*aut.inMemoryAuthentication().
                 withUser("bablu").
                 password("{noop}12345").
                 roles("ADMIN");
-        aut.inMemoryAuthentication().withUser("bablu1").password("{noop}123456").roles("USER");*/
-
+        aut.inMemoryAuthentication().withUser("bablu1").password("{noop}123456").roles("USER");
+*/
     }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-        return http
-                .headers().frameOptions().sameOrigin()
-                .and()
-                /*.csrf().disable()*/
-                .authorizeRequests()
+         http
+              /*  .headers().frameOptions().sameOrigin()
+                .and()*/
+                .csrf().disable()
+                .authorizeHttpRequests()
                 .antMatchers("/images/**",
                         "/css/**","/js/**").permitAll()
-             //   .antMatchers("/").permitAll()
-               // .antMatchers("/auth/**").permitAll()
+               // .antMatchers("/").permitAll()
+                //.antMatchers("/auth/**").permitAll()
 
                 .and()
-                .authorizeRequests()
+                .authorizeHttpRequests()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/user/**").hasAnyRole("ADMIN","USER")
                 .anyRequest().authenticated()
 
                 .and()
-                .formLogin(form->form
-                        .loginPage("/auth/login")
-                        .permitAll()
-                        .usernameParameter("username")
-                        .passwordParameter("password")
-                        .loginProcessingUrl("/auth/login-processing")
-                        .defaultSuccessUrl("/")
-                        .permitAll()
-                )
-                        .logout(logout->logout
-                                .logoutUrl("/auth/logout")
-                                .logoutSuccessUrl("/auth/login?logout")
-                                .permitAll()
-                            )
-                .build();
+
+                .formLogin()
+                .loginPage("/auth/login")
+                .permitAll()
+                .usernameParameter("email")
+                .passwordParameter("password")
+                 .loginProcessingUrl("/login-processing")
+                .successHandler(authSuccessHandler)
+                .failureUrl("/auth/login?error=true")
+
+                .and()
+
+                .logout()
+                .logoutUrl("/auth/logout")
+                .logoutSuccessUrl("/auth/login").permitAll()
+
+                .and()
+                .exceptionHandling().accessDeniedPage("/auth/403");
+
+           return http.build();
 /*
   http.
                 authorizeHttpRequests((authz)->authz
@@ -86,8 +90,26 @@ public class SecurityConfig {
 *
 
         return http.build();
+
+         .formLogin(form->form
+                        .loginPage("/auth/login")
+                        .permitAll()
+                        .usernameParameter("username")
+                        .passwordParameter("password")
+                        .loginProcessingUrl("/login-processing")
+                        .successHandler(successHandler)
+                        .permitAll()
+                )
+                        .logout(logout->logout
+                                .logoutUrl("/auth/logout")
+                                .logoutSuccessUrl("/auth/login?logout")
+                                .permitAll()
+                            )
+
         */
 
 
     }
+
+
 }

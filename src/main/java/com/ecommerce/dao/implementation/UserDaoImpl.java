@@ -4,9 +4,9 @@ import com.ecommerce.dao.definition.UserDao;
 import com.ecommerce.entity.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -56,11 +56,20 @@ public class UserDaoImpl implements UserDao {
         return userDetails;
     }
 
+   /* @Override
+    public User findByEmail(String usEmail) {
+
+        Query query = sessionFactory.getCurrentSession().
+                createQuery("from User where email=: usEmail", User.class);
+        query.setParameter("usEmail", usEmail);
+        return (User) query.list().get(0);
+    }*/
+
     @Override
-    public User findByEmail(String email) {
+    public User findByEmail(String usEmail) {
         List<User> users = sessionFactory.getCurrentSession()
-                .createQuery("FROM User WHERE email = :email", User.class)
-                .setParameter("email", email)
+                .createQuery("from User where email=:usEmail", User.class)
+                .setParameter("usEmail", usEmail)
                 .getResultList();
         return users.size() > 0 ? users.get(0) : null;
     }

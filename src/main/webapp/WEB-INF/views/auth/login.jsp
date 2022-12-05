@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%--<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>--%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="/WEB-INF/views/header.jsp"  %>
@@ -34,15 +34,15 @@
 <div class="main">
     <div class="col-md-6 col-sm-12">
         <div class="login-form">
-            <form action="${pageContext.request.contextPath }/auth/login-processing"
+            <form action="${pageContext.request.contextPath }/login-processing"
                   method="POST">
                 <div class="form-group">
-                    <label>User Name</label> <input type="text" name="username"
-                                                    class="form-control" placeholder="User Name">
+                    <label>User Name</label>
+                    <input type="text" name="email" class=" w3-input w3-border w3-margin-bottom" placeholder="email" required=""/>
                 </div>
                 <div class="form-group">
-                    <label>Password</label> <input type="password"
-                                                   class="form-control" name="password" placeholder="Password">
+                    <label>Password</label>
+                    <input type="password" class=" w3-margin-top w3-text-black" name="password" placeholder="password"  required=""/>
                 </div>
                 <button type="submit" class="btn btn-black">Login</button>
                 <button type="submit" class="btn btn-secondary">Register</button>
