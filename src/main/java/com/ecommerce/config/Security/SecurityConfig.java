@@ -50,8 +50,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests()
                 .antMatchers("/images/**",
                         "/css/**","/js/**").permitAll()
-               // .antMatchers("/").permitAll()
-                //.antMatchers("/auth/**").permitAll()
+                //.antMatchers("/").permitAll()
+                .antMatchers("/auth/**").permitAll()
 
                 .and()
                 .authorizeHttpRequests()

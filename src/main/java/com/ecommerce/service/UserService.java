@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
 
@@ -30,14 +31,16 @@ public class UserService implements UserDetailsService {
            throw new UsernameNotFoundException(email);
        }
 
-       return new org.springframework.security.core.userdetails.
+      /* return new org.springframework.security.core.userdetails.
                User(user.getEmail(),
                user.getPassword(),
-               user.getAuthorities());
+               user.getAuthorities());*/
 
 
-      /*  return email.contains("@") ? userDao.findByEmail(email) :
-                userDao.findByUsername(email);*/
+       /* return (email.contains("@") ? userDao.findByEmail(email) :
+                userDao.findByUsername(email));*/
+
+        return user;
     }
 
 

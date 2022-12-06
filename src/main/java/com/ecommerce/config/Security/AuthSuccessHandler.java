@@ -3,6 +3,7 @@ package com.ecommerce.config.Security;
 import com.ecommerce.entity.User;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
@@ -21,10 +22,9 @@ public class AuthSuccessHandler implements AuthenticationSuccessHandler {
                                         Authentication authentication) throws IOException {
 
         HttpSession session= request.getSession();
-        User authUser=(User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User authUser= (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
      //  User authUser= (User) authentication.getPrincipal();
-
        /* Authentication authUser= SecurityContextHolder.getContext().getAuthentication();*/
 
         session.setAttribute("user", authUser);
